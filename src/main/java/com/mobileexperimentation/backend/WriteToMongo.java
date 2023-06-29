@@ -13,8 +13,9 @@ public class WriteToMongo {
     private final String mongoPassword = System.getenv("MONGO_PASSWORD");
 
     public void createAccount(String accountNumber, String email, String password){
-        String mongoString = "mongodb+srv://MobileExperiementation:" + mongoPassword + "@mobileexperimentation.fn7qbxp.mongodb.net/?retryWrites=true&w=majority";
 
+        String mongoString = "mongodb+srv://MobileExperiementation:" + mongoPassword + "@mobileexperimentation.fn7qbxp.mongodb.net/?retryWrites=true&w=majority";
+        System.out.println(mongoString);
         try (MongoClient mongoClient = MongoClients.create(mongoString)) {
 
             MongoDatabase mobExpDB = mongoClient.getDatabase("MobileExperimentation");
