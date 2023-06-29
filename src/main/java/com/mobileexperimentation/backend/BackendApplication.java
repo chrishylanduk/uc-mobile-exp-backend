@@ -17,6 +17,7 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
+//		WriteToMongo.createAccount("123", "email", "password");
 		return args -> {
 
 			System.out.println("Let's inspect the beans provided by Spring Boot:");
