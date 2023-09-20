@@ -34,14 +34,15 @@ public class Controller {
         return userAccount.accountNumber();
     }
 
-    @GetMapping("accountNumber")
-    public Optional<String> getAccountNumber(@RequestBody UserAccount userAccount) {
-        return business.getAccountNumber(userAccount);
+    @GetMapping("accountNumber/{email}/{password}")
+    public Optional<String> getAccountNumber(@PathVariable String email,
+                                             @PathVariable String password) {
+        return business.getAccountNumber(email, password);
     }
 
     @GetMapping("accountNumber/byId")
-    public Optional<String> getAccountNumberById(@RequestBody UserAccount userAccount) {
-        return business.getAccountNumberById(userAccount.deviceId());
+    public Optional<String> getAccountNumberById(@PathVariable String deviceId) {
+        return business.getAccountNumberById(deviceId);
     }
 
     @GetMapping("/journal/{accountNumber}")

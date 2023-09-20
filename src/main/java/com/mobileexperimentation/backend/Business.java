@@ -28,9 +28,9 @@ public class Business {
         insertMongoData(UserAccount.class, "Account", userAccount);
     }
 
-    public Optional<String> getAccountNumber(UserAccount userAccountRequest) {
-        UserAccount userAccount = getUserAccount(userAccountRequest.email());
-        return userAccount.accountNumberIfValidPassword(userAccount.password());
+    public Optional<String> getAccountNumber(String email, String password) {
+        UserAccount userAccount = getUserAccount(email);
+        return userAccount.accountNumberIfValidPassword(password);
     }
 
     public Optional<String> getAccountNumberById(String deviceId) {
