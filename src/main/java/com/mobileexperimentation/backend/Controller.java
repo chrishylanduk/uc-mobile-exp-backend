@@ -40,7 +40,7 @@ public class Controller {
         return business.getAccountNumber(email, password);
     }
 
-    @GetMapping("accountNumber/byId")
+    @GetMapping("accountNumber/byId/{deviceId}")
     public Optional<String> getAccountNumberById(@PathVariable String deviceId) {
         return business.getAccountNumberById(deviceId);
     }
