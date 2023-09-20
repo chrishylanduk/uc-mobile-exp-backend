@@ -4,16 +4,21 @@ import com.mobileexperimentation.backend.pojo.Journal;
 import com.mobileexperimentation.backend.pojo.PersonalInfo;
 import com.mobileexperimentation.backend.pojo.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin(origins = "https://uc-mobile-exp-backend-production.up.railway.app/")
 public class Controller {
 
     private final Business business;
