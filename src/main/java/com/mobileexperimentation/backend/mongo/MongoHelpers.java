@@ -15,6 +15,7 @@ import org.bson.conversions.Bson;
 
 import java.util.Optional;
 
+import static com.mongodb.client.model.Filters.elemMatch;
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
@@ -31,6 +32,14 @@ public class MongoHelpers {
             .build();
     private static final String MOBILE_EXPERIMENTATION = "MobileExperimentation";
     private static final String ID = "_id";
+
+    public static <T> Optional<T> getAccountById(Class<T> pojoClass, String collection, String id) {
+        try (MongoClient mongoClient = MongoClients.create(CLIENT_SETTINGS)) {
+            MongoDatabase mobExpDB = mongoClient.getDatabase(MOBILE_EXPERIMENTATION);
+            MongoCollection<T> ucInfoCollection = mobExpDB.getCollection(collection, pojoClass);
+            return Optional.ofNullable(ucInfoCollection.find(eq("deviceId", id)).first());
+        }
+    }
 
     public static <T> Optional<T> getMongoData(Class<T> pojoClass, String collection, String id) {
         try (MongoClient mongoClient = MongoClients.create(CLIENT_SETTINGS)) {

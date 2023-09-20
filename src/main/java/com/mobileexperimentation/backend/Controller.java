@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-@CrossOrigin(origins = "https://uc-mobile-exp-backend-production.up.railway.app/")
+@CrossOrigin(origins = "*")
 public class Controller {
 
     private final Business business;
@@ -34,9 +34,14 @@ public class Controller {
         return userAccount.accountNumber();
     }
 
-    @GetMapping("account")
+    @GetMapping("accountNumber")
     public Optional<String> getAccountNumber(@RequestBody UserAccount userAccount) {
         return business.getAccountNumber(userAccount);
+    }
+
+    @GetMapping("accountNumber/byId")
+    public Optional<String> getAccountNumberById(@RequestBody UserAccount userAccount) {
+        return business.getAccountNumberById(userAccount.deviceId());
     }
 
     @GetMapping("/journal/{accountNumber}")

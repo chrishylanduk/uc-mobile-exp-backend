@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.mobileexperimentation.backend.mongo.MongoHelpers.getAccountById;
 import static com.mobileexperimentation.backend.mongo.MongoHelpers.getMongoData;
 import static com.mobileexperimentation.backend.mongo.MongoHelpers.insertMongoData;
 import static com.mobileexperimentation.backend.mongo.MongoHelpers.upsertMongoData;
@@ -30,6 +31,11 @@ public class Business {
     public Optional<String> getAccountNumber(UserAccount userAccountRequest) {
         UserAccount userAccount = getUserAccount(userAccountRequest.email());
         return userAccount.accountNumberIfValidPassword(userAccount.password());
+    }
+
+    public Optional<String> getAccountNumberById(String deviceId) {
+        UserAccount userAccount = getUserAccountById(deviceId);
+        return Optional.of(userAccount.accountNumber());
     }
 
     public void addJournal(String accountNumber, Journal journal) {
@@ -66,6 +72,10 @@ public class Business {
 
     private UserAccount getUserAccount(String email) {
         return getMongoData(UserAccount.class, ACCOUNT, email).orElse(new UserAccount(email));
+    }
+
+    private UserAccount getUserAccountById(String deviceId) {
+        return getAccountById(UserAccount.class, ACCOUNT, deviceId).orElse(new UserAccount(""));
     }
 
 }

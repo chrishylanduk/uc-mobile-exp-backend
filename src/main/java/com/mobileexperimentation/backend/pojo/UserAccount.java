@@ -3,12 +3,14 @@ package com.mobileexperimentation.backend.pojo;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
-public record UserAccount(@BsonId String email, String accountNumber, String password) {
+public record UserAccount(@BsonId String email, String accountNumber, String password, String deviceId) {
 
     public UserAccount(String email) {
-        this(email, ObjectId.get().toString(), null);
+        this(email, ObjectId.get().toString(), null, null);
     }
 
     public Optional<String> accountNumberIfValidPassword(String inputtedPassword) {
@@ -16,7 +18,7 @@ public record UserAccount(@BsonId String email, String accountNumber, String pas
     }
 
     public UserAccount newAccountNumber() {
-        return(new UserAccount(email, ObjectId.get().toString(), password));
+        return(new UserAccount(email, ObjectId.get().toString(), password, deviceId));
     }
 
 }
