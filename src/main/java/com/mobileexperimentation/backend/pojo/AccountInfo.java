@@ -10,11 +10,11 @@ public record AccountInfo(@BsonId String accountNumber, PersonalInfo personalInf
         this(accountNumber, new PersonalInfo(), new ArrayList<>());
     }
 
-    public AccountInfo(String accountNumber, PersonalInfo personalInfo) {
-        this(accountNumber, personalInfo, new ArrayList<>());
-    }
-
-    public void addJournal(Journal journal) {
+    public AccountInfo withAdditionalJournal(Journal journal) {
+        if (journals == null) {
+            return new AccountInfo(accountNumber, personalInfo, new ArrayList<>(List.of(journal)));
+        }
         journals.add(journal);
+        return this;
     }
 }

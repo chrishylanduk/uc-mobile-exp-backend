@@ -41,8 +41,7 @@ public class Business {
 
     public void addJournal(String accountNumber, Journal journal) {
         AccountInfo accountInfo = getAccountInfo(accountNumber);
-        accountInfo.addJournal(journal);
-        upsertJournals(accountInfo);
+        upsertJournals(accountInfo.withAdditionalJournal(journal));
     }
 
     public void addOrUpdatePersonalInformation(String accountNumber, PersonalInfo personalInfo) {
