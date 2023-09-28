@@ -6,6 +6,7 @@ import com.mobileexperimentation.backend.pojo.PersonalInfo;
 import com.mobileexperimentation.backend.pojo.UserAccount;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,12 +51,12 @@ public class Business {
 
     public List<Journal> getJournalList(String accountNumber) {
         AccountInfo document = getAccountInfo(accountNumber);
-        return document.journals();
+        return document.journals() == null ? Collections.emptyList() : document.journals();
     }
 
     public PersonalInfo getPersonalInfo(String accountNumber) {
         AccountInfo document = getAccountInfo(accountNumber);
-        return document.personalInfo();
+        return document.personalInfo() == null ? new PersonalInfo() : document.personalInfo();
     }
 
     private void upsertJournals(AccountInfo accountInfo) {
